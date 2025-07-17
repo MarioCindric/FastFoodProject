@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FastFood.Model\FastFood.Model.csproj" />
+    <ProjectReference Include="..\FastFood.Repository.Common\FastFood.Repository.Common.csproj" />
+    <ProjectReference Include="..\FastFood.Repository\FastFood.Repository.csproj" />
+    <ProjectReference Include="..\FastFood.Service.Common\FastFood.Service.Common.csproj" />
+    <ProjectReference Include="..\FastFood.Service\FastFood.Service.csproj" />
+    <ProjectReference Include="..\FastFoodIdentity.Dal\FastFoodIdentity.Dal.csproj" />
+  </ItemGroup>
+
+
+</Project>
