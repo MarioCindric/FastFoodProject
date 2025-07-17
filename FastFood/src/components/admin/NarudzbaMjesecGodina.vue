@@ -29,7 +29,7 @@ const chartData = ref({
   }]
 })
 
-// Ponašanje i izgled grafa
+
 const options = {
   responsive: true,
   plugins: {
@@ -106,7 +106,6 @@ async function ucitajPodatke() {
     }
   }
 }
-
 onMounted(ucitajPodatke)
 // Kad se godina ili mjsec promjenje, zove funkciju
 watch([mjesec, godina], ucitajPodatke)

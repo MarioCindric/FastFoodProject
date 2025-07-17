@@ -1,4 +1,4 @@
-<script setup>
+  <script setup>
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import 'bootstrap/dist/js/bootstrap.bundle'
@@ -30,11 +30,10 @@ async function prikaziOcjenuDialog(jelo) {
   }
 }
 
-//Praćenje stanja košarice preko local storagea
+
 const saved = localStorage.getItem('cart')
 if (saved) cart.value = JSON.parse(saved)
 
-// Watch automatski azurira local storage kad se kosarica promijeni, deep prati svaku promjenu
 watch(cart, v =>
   localStorage.setItem('cart', JSON.stringify(v)),
   { deep: true }
@@ -50,13 +49,12 @@ async function dohvatiKategorije() {
   }
 }
 
-// Jela
+
 onMounted(async () => {
   jela.value = (await axios.get('https://localhost:5001/jelo')).data
   await dohvatiKategorije()
 })
 
-// Grupiranje po kategoriji
 
 function grupirajPoKategoriji(jela) {
   const grupe = {}
@@ -66,18 +64,10 @@ function grupirajPoKategoriji(jela) {
   })
   return grupe
 
-  /*{  ključ naziv kategorije, a vrijednost je objekti jela
-  "Pizze": [
-    { id: 1, naziv: "Margherita", opis: "...", cijena: 50, dostupno: true, ... },
-    { id: 2, naziv: "Capricciosa", ... }
-  ],
-  "Pića": [
-    { id: 3, naziv: "Coca-Cola", ... }
-  ]
-}*/
+  
 }
 
-// Filtriranje jela po dostupnosti i nazivu
+
 const filtriranaJela = computed(() => {
   const naziv = filterNaziv.value.trim().toLowerCase()
   let rezultat = jela.value.filter(j => j.dostupno)
@@ -85,16 +75,9 @@ const filtriranaJela = computed(() => {
   return rezultat.filter(j => j.naziv.toLowerCase().includes(naziv))
 })
 
-
-// grupirana jela za ispis
 const grupiranaJela = computed(() => grupirajPoKategoriji(filtriranaJela.value))
 
-//const grupiranaJela = computed(() => grupirajPoKategoriji(jela.value))
-
-
-// Dodavanje u kosaricu
 function dodajUKosaricu(proizvod) {
-  // Gleda jel postoji stavka u kosarici s tim id-jem, ako postoji onda povecava count ako ne onda dodaje novi objekt
   const stavka = cart.value.find(x => x.id === proizvod.id)
   if (stavka) stavka.count++
   else
@@ -112,10 +95,10 @@ function dodajUKosaricu(proizvod) {
   })
 }
 
-// Uklanjanje jela iz košarice
+
 function ukloniUKosaricu(proizvod) {
 
-  // Kad se klikne na "-" prozivod se smanjuje, ako je proizvod 0 onda se miče iz košarice
+  
   const stavka = cart.value.find(x => x.id === proizvod.id)
   if (!stavka) return
   stavka.count--
@@ -132,13 +115,11 @@ function resizeUrl(url) {
 
 <template>
   <Toast position="bottom-right" />
-  <!-- Decrement emita child elemetu da se proizvod miče iz košarice-->
   <Kosarica
     :items="cart"
     @decrement-item="ukloniUKosaricu"
   />
 
-  <!-- Filter kategorija, za linkove -->
   <div class="my-3 px-4">
   <div class="d-flex flex-wrap justify-content-center gap-2">
     <div v-for="kategorija in kategorije" :key="kategorija">
@@ -160,7 +141,6 @@ function resizeUrl(url) {
   />
 </div>
 
-<!-- Ispis jela koja su prethodno grupirana, kreiranje kartice -->
   <div v-for="(grupa, naziv) in grupiranaJela" :key="naziv" class="mb-5">
     <h3 :id="naziv">{{ naziv }}</h3>
     <div class="row">

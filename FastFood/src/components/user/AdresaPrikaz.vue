@@ -8,7 +8,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['adresaAzurirana'])
 
-// Id prijavljenog korisnika
+
 const auth = useAuthStore()
 const korisnikId = auth.user.id
 
@@ -31,7 +31,7 @@ const forma = ref({
 
 const msg = ref('')
 
-// Pripremam dodavanje
+
 function pripremiDodavanje() {
   mod.value = 'dodaj'
   forma.value = {
@@ -45,7 +45,7 @@ function pripremiDodavanje() {
   showAdresaModal.value = true
 }
 
-// Pripremam uredjivanje
+
 function pripremiUredi() {
   mod.value = 'uredi'
   const a = aktivnaAdresa.value
@@ -75,7 +75,7 @@ async function spremiAdresu() {
   if (!validiraj()) return
 
   try {
-    // dodavanje ili uređivanje
+
     if (mod.value === 'dodaj') {
       await axios.post('/Adresa/add', {
         korisnikId,
@@ -88,7 +88,7 @@ async function spremiAdresu() {
       await axios.post('/Adresa/edit', { ...forma.value })
     }
 
-    // odmah povuci svježu adresu i javi parentu
+    
     const get = await axios.get(`/Adresa/adresa/korisnik/${korisnikId}`)
     const nova = get.data[0] || null
     emit('adresaAzurirana', nova)

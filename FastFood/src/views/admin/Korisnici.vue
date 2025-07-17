@@ -4,7 +4,8 @@ import axios from 'axios'
 
 const korisnici = ref([])
 const korisnikFilter = ref('')
-// Dohvaćam korisnike za ispis u tablicu
+
+
 async function dohvatiSveKorisnike()
 {
     const res = await axios.get('/api/auth/samoKorisnici')
@@ -63,13 +64,5 @@ const filtriraniKorisnici = computed (() =>{
             <td>{{ z.lastName }}</td>
         </tr>
     </tbody>
-    <!-- <tbody>
-        <tr v-for="(z, index) in korisnici" :key="z.id">
-            <td>{{ index + 1 }}.</td>
-            <td>{{ z.email }}</td>
-            <td>{{ z.firstName }}</td>
-            <td>{{ z.lastName }}</td>
-        </tr>
-    </tbody> -->
 </table>
 </template>

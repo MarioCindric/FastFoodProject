@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
 
-// Reaktivne varijable
+
 const sveNarudzbe = ref([])
 const modalOtvoren = ref(false)
 const aktivnaNarudzba = ref(null)
@@ -12,7 +12,6 @@ const statusFilter = ref("Sve")
 const filterDatumTekst = ref('')
 
 
-// Filtrira narudžbe po statusu i korisniku i datumu
 const filtriraneNarudzbe = computed(() => {
   return sveNarudzbe.value.filter(n => {
     const jeKorisnik = n.korisnikId === user.id
@@ -30,7 +29,6 @@ const filtriraneNarudzbe = computed(() => {
 
 
 
-// Dohvaća sve narudžbe
 async function dohvatiNarudzbe() {
   try {
     const res = await axios.get('/Narudzba/sve')
@@ -40,7 +38,6 @@ async function dohvatiNarudzbe() {
   }
 }
 
-// Otvara modal s detaljima jela u narudžbi
 async function otvoriModal(narudzba) {
   aktivnaNarudzba.value = narudzba
   try {
@@ -53,14 +50,13 @@ async function otvoriModal(narudzba) {
   modalOtvoren.value = true
 }
 
-// Zatvara modal
+
 function zatvoriModal() {
   modalOtvoren.value = false
   aktivnaNarudzba.value = null
   detaljiJela.value = []
 }
 
-// Inicijalno dohvaća narudžbe i periodično svakih 10s
 onMounted(() => {
   dohvatiNarudzbe()
   setInterval(dohvatiNarudzbe, 10000)
@@ -71,7 +67,6 @@ onMounted(() => {
   <div class="container mt-4">
     <h3>Moje aktivne narudžbe</h3>
 
-    <!-- Padajući izbornik za filtriranje po statusu -->
     <div class="mb-3">
       <label for="statusFilter" class="form-label">Filtriraj po statusu</label>
       <select id="statusFilter" class="form-control w-auto" v-model="statusFilter">

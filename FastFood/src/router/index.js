@@ -4,14 +4,10 @@ import Login from '../views/Login.vue'
 import Registracija from '../views/Registracija.vue'
 import Narudzba from '../views/Narudzba.vue'
 import PocetnaUser from '../views/PocetnaUser.vue'
-import MojProfilAdmin from '../views/admin/MojProfilAdmin.vue'
 import Statistika from '../views/admin/Statistika.vue'
 import PovijestNarudzbi from '../views/user/PovijestNarudzbi.vue'
 import MojProfilUser from '../views/user/MojProfilUser.vue'
-import NarudzbeZaposlenik from '../views/Employee/NarudzbeZaposlenik.vue'
-import ObradaNarudzbe from '../views/Employee/ObradaNarudzbe.vue'
 import ZavrseneNarudzbe from '../views/Employee/ZavrseneNarudzbe.vue'
-import NarudzbeDostava from '../views/Employee/NarudzbeDostava.vue'
 import AktivneNarudzbe from '../views/user/AktivneNarudzbe.vue'
 import PotvrdaNarudzbe from '../views/PotvrdaNarudzbe.vue'
 import NotFound from '../views/NotFound.vue'
@@ -58,11 +54,6 @@ const routes =
         component:PocetnaUser
     },
 
-    {
-        path:"/Profil",
-        name:"Profil",
-        component:MojProfilAdmin
-    },
 
     {
         path:"/Statistika",
@@ -81,17 +72,6 @@ const routes =
         name:"Povijest",
         component:PovijestNarudzbi
     },
-    {
-        path:"/KreiraneNarudzbe",
-        name:"KreiraneNarudzbe",
-        component:NarudzbeZaposlenik
-    },
-
-    {
-        path:"/ObradaNarudzbe",
-        name:"ObradaNarudzbe",
-        component:ObradaNarudzbe
-    },
     
     {
         path:"/ZavrseneNarudzbe",
@@ -99,11 +79,6 @@ const routes =
         component:ZavrseneNarudzbe
     },
 
-    {
-        path: "/NarudzbeDostava",
-        name: "NarudzbeDostava",
-        component: NarudzbeDostava
-    },
 
     {
         path:"/AktivneNarudzbe",

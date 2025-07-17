@@ -6,7 +6,7 @@ import AdresaPrikaz from '../../components/user/AdresaPrikaz.vue'
 import KarticaPrikaz from '../../components/user/KarticaPrikaz.vue'
 import KorisnikPodaci from '../../components/user/KorisnikPodaci.vue'
 
-// Funkcija za ažuriranje adrese iz child komponente
+
 function azurirajAdresu(nova) {
   if (nova === null) {
     adresa.value = []
@@ -15,7 +15,7 @@ function azurirajAdresu(nova) {
   }
 }
 
-// Funkcija za ažuriranje kreditne kartice iz child komponente
+
 function azurirajKarticu(nova) {
   if (nova === null) {
     kartica.value = []
@@ -24,13 +24,13 @@ function azurirajKarticu(nova) {
   }
 }
 
-// Dohvaćanje podataka o korisniku iz auth storea
+
 const auth = useAuthStore()
 const adresa = ref([])
 const kartica = ref([])
 const aktivanTab = ref('podaci')
 
-// Dohvaća adresu i karticu korisnika
+
 onMounted(async () => {
   const id = auth.user.id
   try {

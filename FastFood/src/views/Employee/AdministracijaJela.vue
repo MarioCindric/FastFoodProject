@@ -17,23 +17,22 @@ const statistikaOcjena = ref({})
 
 const prikaziNedostupne = ref(true)
 
-// Dohvaćanje jela kad se stranica otvori
+
 onMounted(async () => {
   jela.value = (await axios.get('/jelo')).data
   await dohvatiKategorije()
 })
 
-// Funkcija za dohvacanje kategorija
+
 async function dohvatiKategorije() {
   try {
     const res = await axios.get('/KategorijaJelo/kategorije/sve')
-    kategorije.value = res.data.map(k => k.naziv) // Sadrži samo nazive
+    kategorije.value = res.data.map(k => k.naziv) 
   } catch (err) {
     console.error('Greška pri dohvaćanju kategorija:', err)
   }
 }
 
-// Grupiram jela po kategoriji
 
 function grupirajPoKategoriji(jela) {
   const grupe = {}
@@ -43,7 +42,7 @@ function grupirajPoKategoriji(jela) {
   })
   return grupe
 
-  /*Pizze:{id: naziv:pizza} ... Pića[id: naziv:] */
+
 }
 
 
@@ -61,7 +60,7 @@ const filtriranaJela = computed(() => {
 function togglePrikaz() {
   prikaziNedostupne.value = !prikaziNedostupne.value
 }
-//  Lista jela filtriranih po nazivu
+
 const grupiranaJela = computed(() => grupirajPoKategoriji(filtriranaJela.value))
 
 function otvoriJelo(jeloId) {
@@ -69,7 +68,7 @@ function otvoriJelo(jeloId) {
 }
 
 
-// Manipuliranje slikama
+
 function resizeUrl(url) {
   return url.replace('/upload/', '/upload/w_180,h_120,c_fill/')
   //url.replace('/upload/', '/upload/w_180,h_120,c_pad,b_white/')

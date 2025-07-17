@@ -7,10 +7,10 @@ import { useToast } from 'primevue/usetoast'
 const router = useRouter()
 const toast = useToast()
 
-// Košarica
+
 const cart = ref([])
 
-// Korisnik id jer je spojeno za logiranog i nelogiranog
+
 const korisnikId = ref(null)
 
 const nacinDostave = ref('Preuzimanje u restoranu')
@@ -21,10 +21,10 @@ const adresaUlica = ref('')
 const adresaZgrada = ref('')
 const adresaKat = ref('')
 
-// Vrijeme + 30 minuta za timepicker
+
 const now = new Date(Date.now() + 30 * 60 * 1000)
 
-// vrijeme dostave
+
 const vrijemeDostave = ref({
   hours: now.getHours(),
   minutes: now.getMinutes(),
@@ -41,12 +41,11 @@ const napomena = ref('')
 
 // Izračun cijene
 const ukupno = computed(() =>
-  // s je suma, i je stavka. sum je na početku 0. cijena * količina
   cart.value.reduce((s, i) => s + i.cijena * i.count, 0).toFixed(2)
 )
 
 
-// Formatiranje za spremanje u bazu 
+
 const narudzbaTime = () => {
   const now = new Date()
   const time = vrijemeDostave.value
@@ -54,14 +53,13 @@ const narudzbaTime = () => {
     now.getFullYear(),
     now.getMonth(),
     now.getDate(),
-    time.hours + 2, // 2 sata zbog vremenske zone
+    time.hours + 2, 
     time.minutes,
     time.seconds
   )
   return isNaN(dateTime.valueOf()) ? now : dateTime
 }
 
-// Gleda način dostave, ako je dostava onda puni adresu iz spremljenih podataka
 watch(nacinDostave, (novi) => {
   if (novi === 'Dostava' && adresaZaKorisnika.value) {
     adresaGrad.value = adresaZaKorisnika.value.grad
@@ -71,7 +69,7 @@ watch(nacinDostave, (novi) => {
   }
 })
 
-// Gleda način plaćanja, ako je novi način, onda ažurira podatke
+
 watch(nacinPlacanja, (novi) => {
   if (novi === 'Kartično plaćanje' && karticaZaKorisnika.value) {
     karticaBrojKartice.value = karticaZaKorisnika.value.brojKartice
@@ -106,7 +104,7 @@ function validirajKarticu() {
   return true
 }
 
-// Validacija vremena dostave
+
 function validirajVrijemeDostave() {
   const sada = new Date()
   const uneseno = new Date(
@@ -135,14 +133,8 @@ function validirajVrijemeDostave() {
   return true
 }
 
-// Dodavanje narudžbe
+
 async function Dodaj() {
-
-//   if (!cart.value.length) {
-//   toast.add({ severity: 'secondary', summary: 'Košarica', detail: 'Košarica je prazna.', life: 3000 })
-//   return
-// }
-
   if (!validirajVrijemeDostave()) return
 
   if (nacinDostave.value === 'Dostava') {
@@ -182,8 +174,7 @@ async function Dodaj() {
     await axios.post("https://localhost:5001/Narudzba/add", podaci)
     const res = await axios.get('https://localhost:5001/Narudzba/sve')
     const sveNarudzbe = res.data
-    // Uzima id prve narduzbe, uspoređuje itd sve dok ne dobije najveći id
-    // const zadnja = sveNarudzbe[sveNarudzbe.length - 1]
+    
     const zadnja = sveNarudzbe.reduce((max, cur) => cur.id > max.id ? cur : max, sveNarudzbe[0])
     const narudzbaId = zadnja.id
 

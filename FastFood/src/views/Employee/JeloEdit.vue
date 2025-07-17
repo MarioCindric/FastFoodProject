@@ -9,10 +9,10 @@ const router = useRouter()
 const route = useRoute()
 const toast = useToast()
 
-// Id jela iz urla za uređivanje
+
 const jeloId = route.params.id
 
-// defaultno
+
 const jelo = ref({
   id: null,
   naziv: '',
@@ -24,12 +24,12 @@ const jelo = ref({
   kategorijaId: null
 })
 
-//const confirmDelete = ref(false)
+
 const kategorije = ref([])
 const previewUrl = ref(null)
 const slikaFile = ref(null)
 
-// Dohvaćanje kategorija i podataka o jelu
+
 onMounted(async () => {
   const katRes = await axios.get('/KategorijaJelo/kategorije/sve')
   kategorije.value = katRes.data
@@ -39,13 +39,13 @@ onMounted(async () => {
   previewUrl.value = jelo.value.slikaUrl
 })
 
-// Spremanje slike i generiranje url za prikaz
+
 function handleFile(e) {
   slikaFile.value = e.target.files[0]
   previewUrl.value = URL.createObjectURL(slikaFile.value)
 }
 
-// Upload slike na cloudinary
+
 async function uploadSlikaNaCloudinary() {
   // ako nije odabrana nova, vraća staru
   if (!slikaFile.value) return jelo.value.slikaUrl
@@ -63,7 +63,6 @@ async function uploadSlikaNaCloudinary() {
 
   const data = await response.json()
 
-  // url koji vodi do slike
   return data.secure_url
 }
 
@@ -94,27 +93,7 @@ async function submitForm() {
 }
 
 
-// function otvoriDeleteModal() {
-//   confirmDelete.value = true
-// }
 
-
-// Brisanje jela
-/*
-async function potvrdiBrisanje() {
-  try {
-    await axios.delete(`/jelo/delete/${jelo.value.id}`)
-    confirmDelete.value = false
-    router.push('/AdministracijaJela')
-  } catch {
-    toast.add({
-      severity: 'error',
-      summary: 'Greška',
-      detail: 'Brisanje nije uspjelo.',
-      life: 3000
-    })
-  }
-}*/
 
 </script>
 
@@ -162,19 +141,10 @@ async function potvrdiBrisanje() {
       </div>
 
       <button type="submit" class="btn btn-info">Spremi promjene</button>
-      <!-- <button type="button" class="btn btn-danger ms-2" @click="otvoriDeleteModal">
-        Obriši jelo
-      </button> -->
     </form>
   </div>
 
-  <!-- <Dialog v-model:visible="confirmDelete" modal header="Potvrda brisanja" :closable="false">
-    <p>Jeste li sigurni da želite obrisati jelo: <strong>{{ jelo.naziv }} {{ jelo.opis }}</strong>?</p>
-    <template #footer>
-      <Button label="Odustani" severity="secondary" @click="confirmDelete = false" />
-      <Button label="Obriši" severity="danger" @click="potvrdiBrisanje" />
-    </template>
-  </Dialog> -->
+ 
 
 </template>
 

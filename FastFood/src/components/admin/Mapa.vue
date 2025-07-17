@@ -4,10 +4,10 @@ import axios from 'axios'
 import { Chart } from 'vue-chartjs'
 
 
-// Odabrani vremenski period (default: tjedan)
+
 const period = ref('dan')
 
-// Odvojeni filteri za od i do datuma
+
 const datumOd = ref(null)
 const datumDo = ref(null)
 
@@ -32,7 +32,7 @@ const heatmapData = ref({
   }]
 })
 
-// Opcije za chart prikaz
+
 const options = {
   responsive: true,
   plugins: {
@@ -142,7 +142,6 @@ function postaviPodatke(data) {
   }
 }
 
-// Učitavanje podataka iz backend-a
 async function ucitajPoFilterima() {
   const params = { period: period.value }
 
@@ -159,10 +158,10 @@ if (datumDo.value) params.doDatuma = datumDo.value.toLocaleDateString('sv-SE')
 
 }
 
-// Automatsko učitavanje prilikom mounta
+
 onMounted(ucitajPoFilterima)
 
-// Reakcija na promjenu filtera
+// reakcija na promjenu filtera
 watch([period, datumOd, datumDo], ucitajPoFilterima)
 watch(period, () => {
   datumOd.value = null

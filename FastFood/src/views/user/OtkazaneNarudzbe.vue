@@ -14,14 +14,14 @@ const aktivnaNarudzba = ref(null)
 const detaljiJela = ref([])
 const user = JSON.parse(localStorage.getItem('user'))
 
-// Filtrira narudzbe, otkazane i od usera
+
 const filtriraneNarudzbe = computed(() =>
   sveNarudzbe.value.filter(n =>
     n.korisnikId === user.id &&
     (n.statusNarudzbe === "Otkazana")
   )
 )
-// Dohvaća sve narudžbe
+
 async function dohvatiNarudzbe() {
   try {
     const res = await axios.get('/Narudzba/sve')
@@ -30,7 +30,7 @@ async function dohvatiNarudzbe() {
     console.error("Greška pri dohvaćanju narudžbi:", err)
   }
 }
-// puni modal s podacima otvorene narudžbe
+
 
 async function otvoriModal(narudzba) {
   aktivnaNarudzba.value = narudzba
@@ -50,7 +50,7 @@ function zatvoriModal() {
   detaljiJela.value = []
 }
 
-// Svakih 10 sekundi dohvaća narudžbe za ažuriranje statusa
+
 onMounted(() => {
   dohvatiNarudzbe()
   setInterval(dohvatiNarudzbe, 10000)
@@ -127,4 +127,3 @@ onMounted(() => {
 </template>
 
 
-<!-- VIŠAK -->

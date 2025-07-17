@@ -8,7 +8,7 @@ import { useToast } from 'primevue/usetoast'
 
 const router = useRouter()
 
-// za formu
+
 const jelo = ref({
   naziv: '',
   opis: '',
@@ -32,7 +32,6 @@ onMounted(async () => {
   kategorije.value = res.data
 })
 
-// Spremanje file objekta, privremeni url za prikaz slike
 function handleFile(e) {
   slikaFile.value = e.target.files[0]
   previewUrl.value = URL.createObjectURL(slikaFile.value)
@@ -40,7 +39,7 @@ function handleFile(e) {
 
 
 
-// Slanje slike na cloudinary
+
 async function uploadSlikaNaCloudinary() {
   const formData = new FormData()
   formData.append('file', slikaFile.value)

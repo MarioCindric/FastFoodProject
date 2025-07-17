@@ -49,8 +49,6 @@ function postojiKorisnik() {
   return false
 }
 
-
-// Dohvaća korisnike kad se klikne na registraciju
 onMounted(dohvatiKorisnike)
 
 

@@ -2,21 +2,17 @@
 import { computed } from 'vue'
 import { defineProps, defineEmits } from 'vue'
 
-
-// Komponenta prima podatke, odnosno proizvode, po defaultu prazan array
 const props = defineProps({
   items: { type: Array, default: () => [] }
 })
 
-
-// Definicija događaja prema parentu, naziv događaja
 const emit = defineEmits(['decrement-item'])
 
-// Sluzi za gumb za narucivanje, ako je 0 onda je onemogućen gumb itd.
 const prazno = computed(() => props.items.length === 0)
 
 
-// Šalje događaj s artiklom koji se treba umanjiti, kad se pozove funkcija, pokrece event decrement-item i salje roditelju idem kao argument
+// Šalje događaj s artiklom koji se treba umanjiti, kad se pozove funkcija, pokrece event decrement-item 
+// i salje roditelju idem kao argument
 function decrement(item) {
   emit('decrement-item', item)
 }
@@ -83,11 +79,6 @@ const unutarRadnogVremena = computed(() => {
   </div>
 </template>
 
-<!-- <router-link v-if="!prazno && unutarRadnogVremena" to="/narudzba" class="btn btn-success w-100"><i class="pi pi-shopping-cart me-2"></i> NaručiNaruči</router-link>
-    <button v-else class="btn btn-primary disabled" disabled>{{
-    !unutarRadnogVremena? 'Naručivanje izvan radnog vremena' : 'Naruči'}}</button>-->
-
-    <!--<router-link to="/narudzba" class="btn btn-success">Naruči</router-link>-->
 
 <style scoped>
 .custom-offcanvas {

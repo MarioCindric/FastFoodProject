@@ -29,7 +29,7 @@ const top5ChartData = ref({
 })
 
 const top5Options = {
-  // prilagodba veličini containera
+  
   responsive: true,
   plugins: {
     legend: { display: false },
@@ -85,7 +85,7 @@ async function dohvatiKategorije() {
   }
 }
 
-// Šaljem parametre backend funkciji
+
 async function ucitajTop5() {
   try {
     const response = await axios.get('/api/Statistika/top5', {
@@ -97,7 +97,7 @@ async function ucitajTop5() {
     })
 
     const data = response.data
-    // Dobivam objekt, mapiram vrijednosti, npr pizza = 40 burger = 30
+    
     top5ChartData.value = {
       labels: data.map(i => i.nazivJela),
       datasets: [{

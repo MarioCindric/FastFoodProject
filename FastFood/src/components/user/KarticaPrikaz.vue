@@ -3,20 +3,20 @@ import { ref, computed } from 'vue'
 import axios from 'axios'
 import { useAuthStore } from '../../stores/auth'
 
-// Propsi i emit
+
 const props = defineProps({
   kartica: Array
 })
 const emit = defineEmits(['karticaAzurirana'])
 
-// dohvat podataka iz auth storea
+
 const auth = useAuthStore()
 const korisnikId = auth.user.id
 
 // Computed za aktivnu karticu (prva iz niza ili null)
 const aktivnaKartica = computed(() => props.kartica?.[0] || null)
 
-// varijable za kontrolu modala i forme
+
 const mod = ref('dodaj')
 const showKarticaModal = ref(false)
 const showBrisanjeModal = ref(false)
@@ -30,7 +30,7 @@ const forma = ref({
 
 const msg = ref('')
 
-// Pripremam modal za dodavanje: reset forme i prikaz modala
+
 function pripremiDodavanje() {
   mod.value = 'dodaj'
   forma.value = { id: null, brojKartice: '', datumIsteka: '', sigurnosniKod: '' }
@@ -38,7 +38,7 @@ function pripremiDodavanje() {
   showKarticaModal.value = true
 }
 
-// Priprema modala za uređivanje: postavi formu na postojeću karticu i otvori modal
+
 function pripremiUredi() {
   if (!aktivnaKartica.value) return
   mod.value = 'uredi'
@@ -93,7 +93,7 @@ async function spremiKarticu() {
       await axios.post('/KreditnaKartica/edit', { ...forma.value });
     }
 
-    // dohvat svježe kartice i emit
+    // dohvat kartice i emit
     const get = await axios.get(`/KreditnaKartica/kartica/korisnik/${korisnikId}`);
     const novaKartica = get.data[0] || null;
     emit('karticaAzurirana', novaKartica);

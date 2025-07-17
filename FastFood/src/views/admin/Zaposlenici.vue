@@ -34,7 +34,7 @@ async function dohvatiZaposlenike() {
   zaposlenici.value = res.data
 }
 
-// Funkcija u slučaju da u modalu ostanu stari podaci
+
 function pripremiDodavanje() {
   mod.value = 'dodaj'
   username.value = ''
@@ -46,7 +46,7 @@ function pripremiDodavanje() {
   showZaposlenikModal.value = true
 }
 
-// 
+
 function pripremiUredi(z) {
   mod.value = 'uredi'
   odabraniZaposlenik.value = z
@@ -77,13 +77,13 @@ function validacija() {
 }
 
 
-// Provjera postoji li username i email kod uređivanja / dodavanja
+
 function postojiKorisnik() {
   const uname = username.value.toLowerCase()
   const mail = email.value.toLowerCase()
   const aktivniId = odabraniZaposlenik.value?.id
 
-  // Prolazi kroz sve korisnike, vraća true kao nađe nekog tko ispunjava uvjete, inače false
+ 
   const emailZauzet = sviKorisnici.value.some(x =>
 // Ako dodajem onda je prvi uvjet true, inače, uređujem, isključujem trenutnog korisnika da ga ne detektira kao duplikatJ
     (mod.value === 'dodaj' || x.id !== aktivniId) && 
@@ -109,7 +109,6 @@ function postojiKorisnik() {
 }
 
 
-// Spremanje zaposlenika
 async function spremiZaposlenika() {
   if (!validacija()) return
   if (postojiKorisnik()) {
@@ -135,14 +134,12 @@ async function spremiZaposlenika() {
     })
   }
 
-  // Ažurira listu zaposlenika
   await dohvatiZaposlenike()
   showZaposlenikModal.value = false
 }
 
 // Brisanje zaposlenika
 async function obrisiZaposlenika() {
-  //Ako je korisnik odabran, šalje njegov id za brisanje
   if (!odabraniZaposlenik.value) return
 
   if (odabraniZaposlenik.value.role === 'Admin') {
@@ -193,7 +190,7 @@ onMounted(async () => {
           <td>{{ z.lastName }}</td>
           <td>{{ z.role }}</td>
 
-          <!-- Gumbi za uredivanje i brisanje, kod brisanja arrow funkcija, odabraniZaposlenik z je objekt, brisanje modala se prikazuje -->
+          
           <td>
             <Button icon="pi pi-pencil" severity="success" size="small" @click="() => pripremiUredi(z)" />
           </td>
@@ -203,10 +200,9 @@ onMounted(async () => {
         </tr>
       </tbody>
     </table>
-    <!-- :header -> bindam header, priukazuje dodaj ili uredi ovisno o vrijednosti modala -->
     <Dialog v-model:visible="showZaposlenikModal" modal :header="mod === 'dodaj' ? 'Dodaj zaposlenika' : 'Uredi zaposlenika'" :closable="false">
       <div class="p-fluid">
-        <!-- Dodatno, ako je modal za dodavanje onda se prikazuje i lozinka -->
+
         <InputText v-model="username" placeholder="Korisničko ime" class="mb-2" />
         <InputText v-model="email" placeholder="Email" class="mb-2" />
         <Password v-if="mod === 'dodaj'" v-model="password" placeholder="Lozinka" toggleMask class="mb-2" />
@@ -214,7 +210,6 @@ onMounted(async () => {
         <InputText v-model="lastName" placeholder="Prezime" class="mb-2" />
         <small v-if="msg" class="p-error">{{ msg }}</small>
       </div>
-      <!-- Footer za vlaastite gumbove -->
       <template #footer>
         <Button label="Zatvori" severity="warn" @click="showZaposlenikModal = false" />
         <Button label="Spremi" severity="primary" @click="spremiZaposlenika" />

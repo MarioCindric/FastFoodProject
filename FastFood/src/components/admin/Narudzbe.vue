@@ -22,7 +22,6 @@ const chartData = ref({
 })
 
 const options = {
-  // prilagodba veličini containera
   responsive: true,
   plugins: {
     legend: {
@@ -30,7 +29,7 @@ const options = {
     },
     title: {
       display: true,
-      text: 'Broj narudžbi za tekuću godinu i ukupnu količinu', // naslov
+      text: 'Broj narudžbi za tekuću godinu i ukupnu količinu', 
       color: '#f1f1f1',
       font: {
         size: 16,

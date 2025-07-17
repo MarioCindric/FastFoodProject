@@ -11,7 +11,7 @@ const user = JSON.parse(localStorage.getItem('user'))
 const statusFilter = ref("Sve")
 const filterDatumTekst = ref('')
 
-// Computed svojstvo koje filtrira narudžbe ovisno o statusu i dodatno po datumu
+
 const filtriraneNarudzbe = computed(() => {
   return sveNarudzbe.value.filter(n => {
     const jeStatus = statusFilter.value === "Sve"
@@ -52,23 +52,10 @@ function zatvoriModal() {
   detaljiJela.value = []
 }
 
-// async function promijeniStatus(noviStatus) {
-//   const podaci = {
-//     ...aktivnaNarudzba.value,
-//     statusNarudzbe: noviStatus
-//   }
-//   try {
-//     await axios.post("https://localhost:5001/Narudzba/edit", podaci)
-//     zatvoriModal()
-//     await dohvatiNarudzbe()
-//   } catch (err) {
-//     console.error("Greška pri ažuriranju statusa:", err)
-//   }
-// }
+
 
 async function promijeniStatus(noviStatus) {
   try {
-    // 1. Ažuriranje statusa
     const podaci = {
       ...aktivnaNarudzba.value,
       statusNarudzbe: noviStatus
@@ -76,7 +63,7 @@ async function promijeniStatus(noviStatus) {
 
     await axios.post("https://localhost:5001/Narudzba/edit", podaci)
 
-    // 2. Ako prelazi iz "Kreirana" u "U pripremi", dodaj zaposlenika
+    
     if (
       aktivnaNarudzba.value.statusNarudzbe === "Kreirana" &&
       (noviStatus === "U pripremi"  || noviStatus === "Otkazana")

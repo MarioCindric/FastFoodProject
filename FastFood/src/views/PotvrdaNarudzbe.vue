@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const router = useRouter()
 
-// Dohvacam zadnju narudžbu koju sam spremio kod naručivanja
+
 const narudzbaId = localStorage.getItem('zadnjaNarudzbaId')
 const status = ref('Kreirana')
 const vrijeme = ref(null)
@@ -15,17 +15,16 @@ const error = ref(false)
 let intervalId = null
 let countdownInterval = null
 
-// Provjera statusa narudzbe
+
 async function provjeriStatus() {
   try {
-    // Dohvaćam status narudžbe
+  
     const res = await axios.get(`/Narudzba/status/${narudzbaId}`)
     status.value = res.data.status
 
 
     // Nakon 5 minuta briše id local storagea i vraća na početnu stranicu
     if (status.value === 'Završeno' || status.value === 'Otkazana') {
-      // Kada završi, nema potrebe za zvanjem funkcije više
       clearInterval(intervalId)
       setTimeout(() => {
         localStorage.removeItem('zadnjaNarudzbaId')
@@ -41,7 +40,6 @@ async function provjeriStatus() {
 }
 
 
-// Countdown
 function azurirajCountdown()
 {
   if(!vrijemeCountdown.value) return
@@ -50,7 +48,6 @@ function azurirajCountdown()
   const sada = new Date();
   const razlika = vrijemeCountdown.value - sada
 
-  // Ako je vrijeme prošlo prikazuje 0 i miče interval da se funkcija više ne poziva
   if (razlika <= 0) 
   {
     countdown.value = '0h : 0m : 0s'

@@ -7,7 +7,6 @@ const sveNarudzbe = ref([]);
 const statusFilter = ref("Sve")
 const filterDatumTekst = ref('')
 
-// Computed svojstvo koje filtrira narudžbe ovisno o statusu i datumu
 const filtriraneNarudzbe = computed(() => {
   return sveNarudzbe.value.filter(n => {
     const jeStatus = statusFilter.value === "Sve"
@@ -23,12 +22,11 @@ const filtriraneNarudzbe = computed(() => {
 
 
 
-// Reaktivne varijable za modal i trenutno odabranu narudžbu
+
 const showDetaljiModal = ref(false);
 const aktivnaNarudzba = ref(null);
 const detaljiJela = ref([]);
 
-// Otvaranje detalja narudžbe
 async function otvoriDetalje(narudzba) {
   aktivnaNarudzba.value = narudzba;
   try {
@@ -41,14 +39,14 @@ async function otvoriDetalje(narudzba) {
   showDetaljiModal.value = true;
 }
 
-// Zatvaranje detalja
+
 function zatvoriDetalje() {
   showDetaljiModal.value = false;
   aktivnaNarudzba.value = null;
   detaljiJela.value = [];
 }
 
-// Dohvaćanje svih narudžbi kod mountanja komponente
+
 onMounted(async () => {
   try {
     const res = await axios.get('/Narudzba/sve');

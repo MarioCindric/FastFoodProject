@@ -28,13 +28,13 @@ const prometData = ref({
 })
 
 const options = {
-  // prilagodba veličini containera
+
   responsive: true,
   plugins: {
     legend: { display: false },
     title: {
       display: true,
-      text: 'Promet', // naslov
+      text: 'Promet', 
       color: '#f1f1f1',
       font: {
         size: 16,

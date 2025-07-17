@@ -18,13 +18,13 @@ const sviKorisnici = ref([])
 const showUrediModal = ref(false)
 const showBrisanjeModal = ref(false)
 
-// Dohvacanje svih korisnika, za validaciju
+
 async function dohvatiSveKorisnike() {
   const res = await axios.get('/api/auth/svi-korisnici')
   sviKorisnici.value = res.data
 }
 
-// Gleda je li mail zauzet, true ako je, false ako nije 
+
 function emailZauzet() {
   const mail = email.value.toLowerCase()
   return sviKorisnici.value.some(x =>
@@ -32,7 +32,7 @@ function emailZauzet() {
   )
 }
 
-// azuriranje korisnickih podataka
+
 async function azurirajProfil() {
   greska.value = ''
   if (!ime.value || !prezime.value || !email.value) {
@@ -43,7 +43,7 @@ async function azurirajProfil() {
     greska.value = 'Email je već u upotrebi.'
     return
   }
-   // Ako je uspješno, ažurira korisnika za prikaz
+
   try {
     await axios.put(`/api/auth/uredi/korisnik/${auth.user.id}`, {
       firstName: ime.value,
