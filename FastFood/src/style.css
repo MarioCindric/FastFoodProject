@@ -1,0 +1,150 @@
+body {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+.card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 1rem;
+  color: #f1f1f1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0,196,204,0.3);
+}
+
+.btn-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #00c4cc;
+  color: black;
+  border: none;
+  font-weight: bold;
+  width: 36px;
+  height: 36px;
+  border-top-left-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-overlay:hover {
+  background-color: #00a9b1;
+}
+
+.kategorija-btn {
+  border: 1px solid #00c4cc;
+  border-color: white;
+  color: white;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 0.4rem 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.kategorija-btn:hover,
+.kategorija-btn:focus {
+  background-color: #00c4cc;
+  color: #121212 ;
+}
+
+.input-group input {
+  background-color: #1e1e1e;
+  border: 1px solid #444;
+  color: #f1f1f1;
+}
+.input-group input::placeholder {
+  color: #888;
+}
+
+.form-control {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border: 1px solid #444;
+}
+
+.form-control:focus {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  box-shadow: none;
+}
+
+.btn-kosarica
+{
+  background-color: #00c4cc;
+  color: #121212;
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gumb-kosarica:hover {
+  background-color: #00a9b1;
+}
+
+
+.active-nav {
+  color: #00c4cc !important;
+}
+
+.table thead th {
+ background: linear-gradient(to right, #00c4cc, #198754);
+  color: #121212;
+
+
+  border-bottom: 1px solid #333;
+}
+
+.p-dialog,
+.p-dialog .p-dialog-content,
+.p-dialog .p-dialog-header {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  border-color: #333 !important;
+}
+
+.p-dialog .p-dialog-footer {
+  background-color: #1e1e1e !important;
+  
+}
+
+.p-dialog .p-button {
+  color: #fff !important;
+}
+
+.p-dialog input,
+.p-dialog textarea,
+.p-dialog .p-inputtext {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  border: 1px solid #333 !important;
+}
+
+.p-rating .p-rating-icon {
+  color: gold !important;
+}
+
+.p-rating .p-rating-icon:hover {
+  color: orange !important;
+}
+
+.vue3-star-ratings__star svg {
+  fill: gold !important;
+}
+
+body {
+  background-color: #121212;
+  color: #f1f1f1;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.p-dialog {
+  width: 450px !important;
+}
